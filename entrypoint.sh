@@ -11,4 +11,12 @@ if [ `ls /usr/local/apache2/conf | wc -l` -eq 0 ]; then
 	cp -r /tmp/httpd-conf/* /usr/local/apache2/conf/
 fi
 
+# Let's create the basic SVN repos structure
+if [ `ls /svn | wc -l` -eq 0 ]; then
+	cd /svn
+	svnadmin create repos
+	chown -R www-data:www-data repos
+	touch /svn/svn-auth-conf
+fi
+
 exec "$@"
