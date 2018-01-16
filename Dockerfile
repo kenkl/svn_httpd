@@ -13,11 +13,13 @@ RUN sed -i 's|#LoadModule dav_module|LoadModule dav_module|g' /usr/local/apache2
 
 COPY httpd-svn.conf /usr/local/apache2/conf/extra/httpd-svn.conf
 COPY entrypoint.sh /usr/local/sbin/entrypoint.sh
+COPY mkrepo.sh /usr/local/sbin/mkrepo.sh
 
 RUN cp -r /usr/local/apache2/conf /tmp/httpd-conf \
 #&& cp /usr/lib/apache2/modules/*svn* /usr/local/apache2/modules \
 && cp /usr/lib/apache2/*svn* /usr/local/apache2/modules \
-&& chmod +x /usr/local/sbin/entrypoint.sh
+&& chmod 755 /usr/local/sbin/entrypoint.sh \
+&& chmod 755 /usr/local/sbin/mkrepo.sh
 
 VOLUME /svn
 ENTRYPOINT ["/usr/local/sbin/entrypoint.sh"]

@@ -25,6 +25,7 @@ if [ `ls /svn | wc -l` -eq 0 ]; then
 	cd /svn
 	chown -R www-data:www-data repos
 	touch /svn/svn-auth-conf
+	ln -s /usr/local/sbin/mkrepo.sh /svn/mkrepo.sh
 fi
 
 exec "$@"
