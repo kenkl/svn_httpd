@@ -1,0 +1,15 @@
+---
+version: '3'
+services:
+  svn_httpd:
+    build: svn_httpd
+    image: svn_httpd
+    container_name: svnthing
+    volumes:
+    - /docker/svn:/svn
+    ports:
+    - '80:80/tcp'
+    environment:
+    - TZ=America/New_York
+    restart: always
+
