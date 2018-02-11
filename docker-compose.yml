@@ -8,7 +8,6 @@ services:
     volumes:
     - /docker/svn:/svn
     ports:
-    - '8472:80/tcp'
     - '8473:443/tcp'
     environment:
     - TZ=America/New_York
