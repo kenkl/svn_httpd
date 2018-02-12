@@ -20,6 +20,9 @@ if [ `ls /svn | wc -l` -eq 0 ]; then
 	chown -R www-data:www-data repos
 	touch /svn/svn-auth-conf
 	ln -s /usr/local/bin/mkrepo.sh /svn/mkrepo.sh
+        mkdir tls
+        cp /tmp/server.crt ./tls
+        cp /tmp/server.key ./tls
 fi
 
 exec "$@"

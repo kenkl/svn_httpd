@@ -27,6 +27,8 @@ Checked out revision 3.
 
 In the CLI client, svn, chosing "(p)ermanently" will cache the server's details in ~/.subversion/auth/svn.ssl.server. Other clients _should_ have similar behaviours. RTFM for your favourite client to discover how to do that, or bless the container with certs that your client will accept.
 
+The self-signed cert used by the container is located at /docker/svn/tls (/svn/tls within the container) as server.crt and server.key. If you've a cert/key that you'd prefer to use, simply name them appropriately, drop them in /docker/svn/tls and restart the container.
+
 #### Creating users
 
 User accounts are stored in /svn/svn-auth-conf. This is exposed to the host at /docker/svn/svn-auth-conf. The file is used by Apache to authenticate users to satisfy ```Require valid-user``` in httpd-svn.conf. 
@@ -56,26 +58,21 @@ It can then be checked out, modified, and checked in normally.
 Recreating the [SVN documentation](http://svnbook.red-bean.com/en/1.4/svn.ref.svn.html) here is very out-of-scope for this project, but my day-to-day workflow with svn looks something like this:
 
 ```svn co https://svnthing.somwhere.org:8473/repos/reponame``` - to retrieve the repo for the first time on a workstation
+
 (make edits to whatever's in the repo)
+
 ```svn diff``` - (optional) to confirm my edits and have a "final" look at them before committing back to the repo
+
 ```svn ci -m "some comments describing the reasons for this commit"``` - committing the changes to the repo with a comment for ```svn log```
+
 
 If I already have a copy of the repo on my workstation:
 
 ```svn update``` - from within the local directory of the repo to pull the latest version
+
 (make edits)
+
 ```svn diff```
+
 ```svn ci -m "some more comments about this commit"```
-
-#### The future
-
-I do plan to do some things with this repo/project to improve it a bit...
-
-- Expose the certs to the host (/docker/svn) for easier updates. This'll be relatively easy, and probably will be in the next commit here.
-- Figure out a way to incorporate interaction/use of certs from [LetsEncrypt](https://letsencrypt.org/). This would eliminate/reduce the pain caused by self-signed certs.
-
-In my world, SVN is quickly being replaced with Git (for good reasons), so I might roll up a Docker container for Git (in a new repo here). [How hard could that be?](https://www.linux.com/learn/HOW-RUN-YOUR-OWN-GIT-SERVER) I haven't looked around, but it's likely someone already has.
-
-
-
 

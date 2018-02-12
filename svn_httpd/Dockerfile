@@ -13,8 +13,6 @@ RUN apk --no-cache add apache2 apache2-utils apache2-webdav mod_dav_svn subversi
         && cp /tmp/httpd-ssl.conf /usr/local/apache2/conf/extra \
         && cp /tmp/entrypoint.sh /usr/local/bin \
         && cp /tmp/mkrepo.sh /usr/local/bin \
-        && cp /tmp/server.key /usr/local/apache2/conf \
-        && cp /tmp/server.crt /usr/local/apache2/conf \
         && cp /tmp/index.html /usr/local/apache2/htdocs \
         && cp -r /usr/local/apache2/conf /tmp/httpd-conf \
         && cp /usr/lib/apache2/*svn* /usr/local/apache2/modules \
