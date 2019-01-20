@@ -1,4 +1,4 @@
-FROM httpd:alpine
+FROM httpd:2.4.35-alpine
 
 COPY things/* /tmp/
 
